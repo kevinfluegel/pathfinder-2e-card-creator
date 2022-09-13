@@ -19,7 +19,7 @@ function Print() {
     <table className="gap-4">
       <tbody>
         <tr>
-          {cards?.map((card, index) => (
+          {cards?.map((card) => (
             <td className="inline-block" key={card.id}>
               <Card {...card} />
             </td>
