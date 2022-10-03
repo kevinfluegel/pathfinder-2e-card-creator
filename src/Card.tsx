@@ -76,7 +76,7 @@ export const Card = ({
   noBorder = false,
   isPrint = false,
 }: CardProps) => (
-  <div className={`p-1 bg-pf print-card ${noBorder ? "no-border" : undefined}`}>
+  <div className={`bg-pf print-card ${noBorder ? "no-border" : undefined}`}>
     <div id="result" className="text-pf">
       <div className="d-flex">
         <div className="pf-trait-title">

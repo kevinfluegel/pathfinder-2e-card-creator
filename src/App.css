@@ -699,7 +699,7 @@ body {
     /*width:148mm;*/
     /*height:210mm;*/
     /*--*/
-
+    padding: 2rem;
     border: black solid 1px;
     border-radius: 4mm;
     overflow: visible;
