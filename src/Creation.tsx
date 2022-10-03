@@ -71,7 +71,6 @@ function Creation() {
           );
 
           currentCards[editedCardIndex] = { ...card };
-          console.log("...setCards...", { ...card });
           setCards(currentCards);
         }
       } else {

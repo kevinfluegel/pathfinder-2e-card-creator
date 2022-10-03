@@ -43,6 +43,8 @@ export interface CardProps {
   benefit?: string;
   drawback?: string;
   fontSize?: string;
+  noBorder?: boolean;
+  isPrint?: boolean;
 }
 
 export const Card = ({
@@ -71,8 +73,10 @@ export const Card = ({
   benefit,
   drawback,
   fontSize,
+  noBorder = false,
+  isPrint = false,
 }: CardProps) => (
-  <div className="p-1 bg-pf print-card">
+  <div className={`p-1 bg-pf print-card ${noBorder ? "no-border" : undefined}`}>
     <div id="result" className="text-pf">
       <div className="d-flex">
         <div className="pf-trait-title">
@@ -99,7 +103,11 @@ export const Card = ({
         <p className="hang">
           <strong>Aktivierung</strong>
           {actions !== "none" && (
-            <div className={`pf-action ${actions}-action small-action`} />
+            <span
+              className={`pf-action-container ${isPrint ? "print" : undefined}`}
+            >
+              <span className={`pf-action ${actions}-action small-action`} />
+            </span>
           )}
           {activate.map(
             (item, idx) => `${item}${idx !== activate?.length - 1 ? ", " : ""}`
@@ -121,8 +129,13 @@ export const Card = ({
 
       <div className="pf-traits">
         {traits.map((trait) => (
-          <div key={trait} className="pf-trait">
-            {trait}
+          <div className={`pf-trait-border`}>
+            <p
+              key={trait}
+              className={`pf-trait  ${isPrint ? "print" : undefined}`}
+            >
+              {trait}
+            </p>
           </div>
         ))}
       </div>
@@ -149,7 +162,7 @@ export const Card = ({
           <p className="indent">
             <strong>Aktivierung</strong>{" "}
             {actions !== "none" && (
-              <div className={`pf-action ${actions}-action small-action`} />
+              <span className={`pf-action ${actions}-action1 small-action`} />
             )}{" "}
             {activate.map(
               (item, idx) =>
