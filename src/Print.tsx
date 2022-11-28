@@ -1,15 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import { Card, CardProps } from "./Card";
-import html2canvas from "html2canvas";
 import JSZip from "jszip";
 import domtoimage from "dom-to-image";
 
 function Print() {
   const [cards, setCards] = useState<CardProps[] | undefined>(undefined);
   const [print, setPrint] = useState("");
+  const [isPrint, setIsPrint] = useState(false);
   const [downloadLink, setDownloadLink] = useState("");
   const printRefs = useRef<Array<HTMLTableDataCellElement | null>>([]);
+
+  useEffect(() => {
+    if (isPrint) {
+      prepareZip();
+    }
+  }, [isPrint]);
 
   var zip = new JSZip();
   async function prepareZip() {
@@ -36,7 +42,8 @@ function Print() {
       setDownloadLink(`data:application/zip;base64,${base64}`);
     });
 
-    // window.document.documentElement.classList.remove("big");
+    window.document.documentElement.classList.remove("big");
+    setIsPrint(false);
     console.log("done");
   }
 
@@ -56,7 +63,7 @@ function Print() {
         <img src={print} />
         <button
           className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          onClick={prepareZip}
+          onClick={() => setIsPrint(true)}
         >
           prepare Images
         </button>
@@ -77,7 +84,7 @@ function Print() {
                 key={card.id}
                 ref={(ref) => (printRefs.current[idx] = ref)}
               >
-                <Card {...card} noBorder />
+                <Card {...card} noBorder isPrint={isPrint} />
               </td>
             ))}
           </tr>

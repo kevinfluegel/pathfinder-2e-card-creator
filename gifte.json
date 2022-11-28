@@ -1,0 +1,151 @@
+[
+  {
+    "id": "4618c340-62b0-4a44-a29f-5f32add2cb57",
+    "title": "CYTILLESCH-ÖL",
+    "traits": [
+      "ALCHEMISTISCH",
+      "GIFT",
+      "VERWUNDUNGSGIFT",
+      "VERBRAUCHSGEGENSTAND"
+    ],
+    "lvl": "3",
+    "actions": "two",
+    "description": "Diese dicke Substanz wird aus dem den Verstand raubenden Cytilleschfungus destilliert, obschon sie selbst nicht die Fähigkeit zur Veränderung des Gedächtnisses besitzt.",
+    "type": "Gegenstand",
+    "hasAffliction": true,
+    "affliction": {
+      "dc": "1",
+      "savingThrow": { "dc": "19", "type": "Zähigkeit" },
+      "onset": "",
+      "maxDuration": "4 Runden",
+      "phases": [
+        "1W10 Giftschaden (1 Runde)",
+        " 1W12 Giftschaden (1 Runde)",
+        " 2W10 Giftschaden (1 Runde)"
+      ]
+    },
+    "usage": "in 2 Händen gehalten",
+    "bulk": "L",
+    "price": "10 GM",
+    "activate": ["Interagieren"],
+    "activateTop": true,
+    "consumable": true
+  },
+  {
+    "id": "942d71cc-858f-4d18-a7cc-4a8fe8870e6e",
+    "title": "GRABESWURZEL",
+    "traits": [
+      "ALCHEMISTISCH",
+      "GIFT",
+      "VERWUNDUNGSGIFT",
+      "VERBRAUCHSGEGENSTAND"
+    ],
+    "lvl": "3",
+    "actions": "two",
+    "description": "Der undurchsichtige weiße Saft der Grabeswurzel – eines Strauchs trübt den Geist.",
+    "type": "Gegenstand",
+    "usage": "in 2 Händen gehalten",
+    "bulk": "L",
+    "price": "10 GM",
+    "activate": ["Interagieren"],
+    "activateTop": true,
+    "consumable": true,
+    "hasAffliction": true,
+    "affliction": {
+      "dc": "1",
+      "savingThrow": { "dc": "19", "type": "Zähigkeit" },
+      "onset": "",
+      "maxDuration": "4 Runden",
+      "phases": [
+        "1W10 Giftschaden (1 Runde)",
+        " 1W12 Giftschaden und Benommen 1 (1 Runde)",
+        " 2W6 Giftschaden und Benommen 2 (1 Runde)"
+      ]
+    }
+  },
+  {
+    "id": "8feef3f0-e8e0-427c-92e6-837a2492a374",
+    "title": "BELLADONNA",
+    "traits": ["ALCHEMISTISCH", "EINGENOMMEN", "GIFT", "VERBRAUCHSGEGENSTAND"],
+    "lvl": "2",
+    "actions": "two",
+    "description": "Belladonna ist ein weit verbreitetes Gift. Es wird manchmal als „tödlicher Nachtschatten“ bezeichnet und wird aus einer der Tomate ähnlichen Pflanze gewonnen.",
+    "type": "Gegenstand",
+    "hasAffliction": true,
+    "affliction": {
+      "dc": "1",
+      "savingThrow": { "dc": "19", "type": "Zähigkeit" },
+      "onset": "10 Minuten",
+      "maxDuration": "30 Minuten",
+      "phases": [
+        "Geblendet (10 Minuten)",
+        " 1W6 Giftschaden und Kränkelnd 1 (10 Minuten)",
+        " 1W6 Giftschaden, Verwirrt und Kränkelnd 1 (1 Minute)"
+      ]
+    },
+    "usage": "in 1 Hand gehalten",
+    "bulk": "L",
+    "price": "5 GM",
+    "activate": ["Interagieren"],
+    "activateTop": true,
+    "consumable": true
+  },
+  {
+    "id": "53da63eb-4b7e-43cc-8503-70d782ba33a3",
+    "title": "ARSEN",
+    "traits": ["ALCHEMISTISCH", "EINGENOMMEN", "GIFT", "VERBRAUCHSGEGENSTAND"],
+    "lvl": "1",
+    "actions": "one",
+    "description": "Dieses Toxin stellt eine Verbindung von Arsen und anderen Substanzen dar. Solange eine Kreatur von diesem Gift betroffen ist, lässt sich ihr Wert für Kränkelnd nicht reduzieren.",
+    "type": "Gegenstand",
+    "hasAffliction": true,
+    "affliction": {
+      "dc": "1",
+      "savingThrow": { "dc": "18", "type": "Zähigkeit" },
+      "onset": "10 Minuten",
+      "phases": [
+        "1W4 Giftschaden und Kränkelnd 1 (1 Minute)",
+        " 1W6 Giftschaden und Kränkelnd 2 (1 Minute)",
+        " 2W6 Giftschaden und Kränkelnd 3 (1 Minute)"
+      ],
+      "maxDuration": "5 Minuten"
+    },
+    "usage": "in 1 Hand gehalten",
+    "bulk": "L",
+    "price": "3 GM",
+    "activate": ["Interagieren"],
+    "activateTop": true,
+    "consumable": true
+  },
+  {
+    "id": "297869b0-b79a-42d2-9f6a-e7b5929ef8f3",
+    "title": "JAGDSPINNENGIFT",
+    "traits": [
+      "ALCHEMISTISCH",
+      "GIFT",
+      "VERWUNDUNGSGIFT",
+      "VERBRAUCHSGEGENSTAND"
+    ],
+    "lvl": "5",
+    "actions": "two",
+    "description": "Diese dicke Substanz wird aus dem den Verstand raubenden Cytilleschfungus destilliert, obschon sie selbst nicht die Fähigkeit zur Veränderung des Gedächtnisses besitzt.",
+    "type": "Gegenstand",
+    "hasAffliction": true,
+    "affliction": {
+      "dc": "2",
+      "savingThrow": { "dc": "21", "type": "Zähigkeit" },
+      "maxDuration": "6 Runden",
+      "phases": [
+        "1W10 Giftschaden und Auf dem Falschen Fuß (1 Runde)",
+        " 1W12 Giftschaden, Unbeholfen 1 und Auf dem Falschen Fuß (1 Runde)",
+        " 2W6 Giftschaden, Unbeholfen 2 und Auf dem Falschen Fuß (1 Runde)"
+      ]
+    },
+    "usage": "in 2 Händen gehalten",
+    "bulk": "L",
+    "price": "25 GM",
+    "activate": ["Interagieren"],
+    "activateTop": true,
+    "consumable": true
+  }
+]

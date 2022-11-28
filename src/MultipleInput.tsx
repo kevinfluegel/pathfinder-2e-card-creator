@@ -81,10 +81,10 @@ export const MultipleInput = ({
         {asTags ? (
           <div className="pf-traits">
             {values.map((item) => (
-              <div key={item} className="pf-trait relative group">
+              <div key={item} className="pf-trait relative group text-black">
                 <button
                   onClick={remove(item)}
-                  className="absolute inset-0 z-10 invisible group-hover:visible group-hover:bg-neutral-800 flex justify-center"
+                  className="absolute inset-0 z-10 invisible group-hover:visible group-hover:bg-neutral-800 flex justify-center text-black"
                 >
                   <XCircleIcon
                     className="h-5 w-5 text-white"
@@ -98,7 +98,7 @@ export const MultipleInput = ({
         ) : (
           <ul>
             {values.map((item) => (
-              <li className="flex flex-row items-center">
+              <li key={`${item}-li`} className="flex flex-row items-center">
                 <button onClick={remove(item)} className="mr-4">
                   <XCircleIcon className="h-5 w-5" aria-hidden="true" />
                 </button>

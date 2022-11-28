@@ -8,6 +8,7 @@ import {
   XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { v4 } from "uuid";
+import { Button } from "./Button";
 
 function Creation() {
   const [cards, setCards] = useState<CardProps[] | undefined>(undefined);
@@ -37,9 +38,11 @@ function Creation() {
   const deleteCard = useCallback(
     (idx: number) => () => {
       setCards(
-        reversedCards.filter((_, i) => {
-          return i !== idx;
-        })
+        reversedCards
+          .filter((_, i) => {
+            return i !== idx;
+          })
+          .reverse()
       );
     },
     [reversedCards]
@@ -62,9 +65,8 @@ function Creation() {
 
   const handleSubmit = useCallback(
     (card) => {
-      const currentCards = cards ? cards : [];
+      const currentCards = cards ? [...cards] : [];
       if (editableCard) {
-        setEditableCard(null);
         if (!isCopy) {
           const editedCardIndex = currentCards.findIndex(
             ({ id }) => id === card.id
@@ -73,6 +75,7 @@ function Creation() {
           currentCards[editedCardIndex] = { ...card };
           setCards(currentCards);
         }
+        setEditableCard(null);
       } else {
         card.id = v4();
         setCards([...currentCards, card]);
@@ -81,9 +84,14 @@ function Creation() {
     [cards, editableCard, isCopy]
   );
 
+  const reverse = useCallback(() => {
+    if (cards) setCards([...cards].reverse());
+  }, [cards]);
+
   return (
     <>
       <div className="print:hidden text-2xl">
+        <Button onClick={reverse}>Reverse</Button>
         <CardCreationForm
           onSubmit={handleSubmit}
           overwriteState={editableCard}

@@ -83,6 +83,14 @@ export default function CardCreationForm({
                       }}
                       value={state.title}
                     />
+                    <Checkbox
+                      name="isRaw"
+                      label="Raw"
+                      value={!!state.raw}
+                      onChange={(raw) => {
+                        dispatch({ raw });
+                      }}
+                    />
                     <SelectInput
                       colSpan={2}
                       label="Type"
@@ -90,7 +98,7 @@ export default function CardCreationForm({
                         dispatch({ type });
                       }}
                       value={state.type}
-                      options={["Gegenstand", "Talent"]}
+                      options={["Gegenstand", "Talent", "Rune", "Vorrichtung"]}
                       renderItem={(item) => item}
                     />
                     <TextInput
@@ -112,6 +120,18 @@ export default function CardCreationForm({
                       asTags={true}
                       value={state.traits}
                     />
+                    <SelectInput
+                      colSpan={1}
+                      label="Seltenheit"
+                      options={["Selten", "Ungewöhnlich", "Gewöhnlich"]}
+                      onChange={(rarity) => {
+                        dispatch({
+                          rarity,
+                        });
+                      }}
+                      value={state.rarity || "Gewöhnlich"}
+                      renderItem={(item) => item}
+                    />
                     {state.type === "Gegenstand" && (
                       <div className="border rounded-md col-span-6 grid grid-cols-6 gap-3 p-2">
                         <Checkbox
@@ -119,14 +139,12 @@ export default function CardCreationForm({
                           label="konsumierbar"
                           value={!!state.consumable}
                           onChange={(consumable) => {
-                            console.log(consumable);
                             const traits = [
                               ...state.traits.filter(
                                 (trait) => trait !== "VERBRAUCHSGEGENSTAND"
                               ),
                             ];
                             if (consumable) traits.push("VERBRAUCHSGEGENSTAND");
-                            console.log(traits);
                             dispatch({ traits, consumable });
                           }}
                         />
