@@ -4,7 +4,6 @@ import "./App.css";
 import { Route } from "react-router";
 import Creation from "./Creation";
 import Print from "./Print";
-import { Button } from "./Button";
 
 function App() {
   return (
