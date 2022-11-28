@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { v4 } from "uuid";
 import { Button } from "./Button";
+import { TextInput } from "./TextInput";
 
 function Creation() {
   const [cards, setCards] = useState<CardProps[] | undefined>(undefined);
@@ -97,9 +98,11 @@ function Creation() {
 
   return (
     <>
-      <div className="print:hidden text-2xl ml-3 m-4">
-        <Button onClick={reverse}>Reverse</Button>
-        <Button onClick={reverse}>{`Copy Cards to Clipboard`}</Button>
+      <div className="print:hidden text-2xl ">
+        <div className="flex flex-row gap-2 ml-3 m-4">
+          <Button onClick={reverse}>Reverse</Button>
+          <Button onClick={copyToClipboard}>{`Copy Cards to Clipboard`}</Button>
+        </div>
         <CardCreationForm
           onSubmit={handleSubmit}
           overwriteState={editableCard}
