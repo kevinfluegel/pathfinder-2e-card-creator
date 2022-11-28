@@ -48,6 +48,13 @@ function Creation() {
     [reversedCards]
   );
 
+  const copyToClipboard = useCallback(() => {
+    navigator.clipboard.writeText(
+      localStorage.getItem("cards") ||
+        "Du scheinst keine Karten erstellt zu haben"
+    );
+  }, []);
+
   const editCard = useCallback(
     (idx: number) => () => {
       if (cards) setEditableCard(reversedCards[idx]);
@@ -92,6 +99,7 @@ function Creation() {
     <>
       <div className="print:hidden text-2xl ml-3 m-4">
         <Button onClick={reverse}>Reverse</Button>
+        <Button onClick={reverse}>{`Copy Cards to Clipboard`}</Button>
         <CardCreationForm
           onSubmit={handleSubmit}
           overwriteState={editableCard}
