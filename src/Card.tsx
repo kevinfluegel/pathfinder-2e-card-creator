@@ -161,7 +161,7 @@ export const Card = ({
             <h1>{title}</h1>
             {type === "Talent" && actions !== "none" && (
               <span className={`pf-action-container`}>
-                <span className={`pf-action ${actions}-action small-action`} />
+                <span className={`pf-action ${actions}-action md-action`} />
               </span>
             )}
           </div>

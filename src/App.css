@@ -622,6 +622,7 @@ ul {
     /*position: absolute;*/
     background-position: center;
     vertical-align: middle;
+    
 }
 
 .none-action { top: 3px; border-radius: 0; display: inline-block; width: 32px; height: 16px; }
@@ -635,6 +636,35 @@ ul {
 .aa-action, .two-action { top: 3px; border-radius: 0; display: inline-block; width :24px; height :16px; background-repeat : no-repeat; background-image : url('../public/actions/two.png') }
 
 .aaa-action, .three-action { top: 3px; border-radius: 0; display: inline-block; width :32px; height :16px; background-repeat : no-repeat; background-image : url('../public/actions/three.png') }
+
+
+
+.md-action {
+    width: 0;
+    height: 2rem;
+    background-size: contain;
+    margin: 0 4px;
+    vertical-align: middle;
+}
+
+.md-action.one-action,
+.md-action.a-action,
+.md-action.f-action,
+.md-action.free-action {
+    width: 2rem;
+}
+
+.md-action.two-action,
+.md-action.aa-action,
+.md-action.reaction-action,
+.md-action.r-action{
+    width: 3rem;
+}
+
+.md-action.three-action,
+.md-action.aaa-action {
+    width: 4rem;
+}
 
 .small-action {
     width: 0;
@@ -659,7 +689,7 @@ ul {
 }
 
 .small-action.three-action,
-.small-action.aaa-action, {
+.small-action.aaa-action {
     width: 2rem;
 }
 

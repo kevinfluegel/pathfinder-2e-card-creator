@@ -6,13 +6,13 @@ import { MultipleInput } from "./MultipleInput";
 import { TextArea } from "./TextArea";
 import { Checkbox } from "./Checkbox";
 
-const ActionOption = (action: String): ReactNode => {
+const ActionOption = (actions: String): ReactNode => {
   return (
     <div className="flex mr-8">
-      <div className={`pf-action ${action}-action mr-4`}>
-        {action === "none" && " -----"}
-      </div>
-      {action}
+      <span className={`pf-action-container`}>
+        <span className={`pf-action ${actions}-action small-action`}></span>
+      </span>
+      {actions}
     </div>
   );
 };
