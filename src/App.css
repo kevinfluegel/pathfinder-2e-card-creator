@@ -641,9 +641,9 @@ ul {
 
 .md-action {
     width: 0;
-    height: 2rem;
+    height: 1.5rem;
     background-size: contain;
-    margin: 0 4px;
+    margin: 1px 4px;
     vertical-align: middle;
 }
 
@@ -651,19 +651,19 @@ ul {
 .md-action.a-action,
 .md-action.f-action,
 .md-action.free-action {
-    width: 2rem;
+    width: 1.5rem;
 }
 
 .md-action.two-action,
 .md-action.aa-action,
 .md-action.reaction-action,
 .md-action.r-action{
-    width: 3rem;
+    width: 2.25rem;
 }
 
 .md-action.three-action,
 .md-action.aaa-action {
-    width: 4rem;
+    width: 3rem;
 }
 
 .small-action {
