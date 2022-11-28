@@ -90,7 +90,7 @@ function Creation() {
 
   return (
     <>
-      <div className="print:hidden text-2xl m-4">
+      <div className="print:hidden text-2xl ml-3 m-4">
         <Button onClick={reverse}>Reverse</Button>
         <CardCreationForm
           onSubmit={handleSubmit}
