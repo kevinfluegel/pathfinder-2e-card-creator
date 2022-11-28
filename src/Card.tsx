@@ -160,7 +160,9 @@ export const Card = ({
           <div className="pf-trait-title">
             <h1>{title}</h1>
             {type === "Talent" && actions !== "none" && (
-              <div className={`pf-action ${actions}-action`} />
+              <span className={`pf-action-container`}>
+                <span className={`pf-action ${actions}-action small-action`} />
+              </span>
             )}
           </div>
           <h1 className="ml-auto pf-type-box">
