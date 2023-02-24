@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/pathfinder-2e-card-creator/static/css/main.4bf8c355.css",
-    "main.js": "/pathfinder-2e-card-creator/static/js/main.26fafd46.js",
+    "main.js": "/pathfinder-2e-card-creator/static/js/main.ae2c9363.js",
     "static/js/787.3c7c76ae.chunk.js": "/pathfinder-2e-card-creator/static/js/787.3c7c76ae.chunk.js",
     "static/media/bg-dirty.png": "/pathfinder-2e-card-creator/static/media/bg-dirty.0ac06d82551062371d46.png",
     "static/media/tauri-v16-latin-regular.svg": "/pathfinder-2e-card-creator/static/media/tauri-v16-latin-regular.f469d81fb8b729adfa86.svg",
@@ -11,11 +11,11 @@
     "static/media/tauri-v16-latin-regular.woff2": "/pathfinder-2e-card-creator/static/media/tauri-v16-latin-regular.cbcf6a9a0fb6c6e05bee.woff2",
     "index.html": "/pathfinder-2e-card-creator/index.html",
     "main.4bf8c355.css.map": "/pathfinder-2e-card-creator/static/css/main.4bf8c355.css.map",
-    "main.26fafd46.js.map": "/pathfinder-2e-card-creator/static/js/main.26fafd46.js.map",
+    "main.ae2c9363.js.map": "/pathfinder-2e-card-creator/static/js/main.ae2c9363.js.map",
     "787.3c7c76ae.chunk.js.map": "/pathfinder-2e-card-creator/static/js/787.3c7c76ae.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4bf8c355.css",
-    "static/js/main.26fafd46.js"
+    "static/js/main.ae2c9363.js"
   ]
 }
