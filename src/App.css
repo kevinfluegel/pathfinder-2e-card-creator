@@ -788,6 +788,27 @@ body {
     width: 100%;
 }
 
+.draggable {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+@media print and (orientation: landscape) {
+    .card-container {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+}
+
+@media print and (orientation: portrait) {
+    .card-container {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
 
 .print-card {
     display: inline-block;

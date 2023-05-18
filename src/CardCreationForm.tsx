@@ -98,7 +98,7 @@ export default function CardCreationForm({
                         dispatch({ type });
                       }}
                       value={state.type}
-                      options={["Gegenstand", "Talent", "Rune", "Vorrichtung"]}
+                      options={["Gegenstand", "Talent", "Zauber", "Zaubertrick", "Fokus", "Rune", "Vorrichtung"]}
                       renderItem={(item) => item}
                     />
                     <TextInput
@@ -338,7 +338,7 @@ export default function CardCreationForm({
                         )}
                       </div>
                     )}
-                    {(state.type === "Talent" ||
+                    {((state.type === "Talent" || state.type === "Zauber" || state.type === "Zaubertrick") ||
                       (state.type === "Gegenstand" && !!state.activate)) && (
                       <>
                         <SelectInput

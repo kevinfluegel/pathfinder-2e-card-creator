@@ -8,7 +8,7 @@ import Print from "./Print";
 function App() {
   return (
     <div className="App">
-      <nav className="bg-gray-800">
+      <nav className="bg-gray-800 print:hidden">
         <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div className="hidden sm:ml-6 sm:block">
             <div className="flex space-x-4 my-2">

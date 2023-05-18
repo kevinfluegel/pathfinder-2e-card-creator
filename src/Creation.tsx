@@ -96,6 +96,8 @@ function Creation() {
     if (cards) setCards([...cards].reverse());
   }, [cards]);
 
+
+
   return (
     <>
       <div className="print:hidden text-2xl ">

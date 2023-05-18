@@ -3,6 +3,7 @@ import showdown from "showdown";
 import DOMPurify from "dompurify";
 import { images, Images } from "./images";
 
+
 export type Action = "none" | "one" | "two" | "three" | "reaction";
 
 export interface CardProps {
@@ -56,6 +57,80 @@ export interface CardProps {
 
 const converter = new showdown.Converter();
 
+const transform = (description: string) => {
+  let str = description
+    .replace(/^([\w]*) SG/gim, "**$1** SG")
+    .replace(/^([\w ]*) \(/gim, "**$1** (")
+    // Preis 4 GM
+    // Schaden 1W8 H
+    // Last 1
+    // Hände 1
+    // Gruppe Schwerter
+    // Waffeneigenschaften Beidhändig W12
+    .replace(
+      /\n(Preis|Schaden|Last|Hände|Gruppe|Waffeneigenschaften|Entfernungseinheit|Nachladen|(?:Ungewöhnliche )?(?:Einfache )?(?:Nahkampf|Fernkampf|Spezial)(?:kriegs)?waffe)[\t\s+]/gm,
+      "\n\n$1 "
+    )
+    .replace(
+      /( |^)(RK Bonus|Kosten|Zugang|Härte TP|Domänenzauber|Kommunikation|Gottheiten|Wirkungsbereich|Vertiefter Domänenzauber|Wirkungsdauer|Secondary Casters|Secondary Checks|Ziel\(e\)|Archetyp|Voraussetzung|Voraussetzungen|Rüstungsspezialisierungseffekte|Kapazität|Speziell|Cast(?! \w+ Spell)|Malus \w+ Bewegungsrate|Rüstungsmalus|Stärke \d+|Gruppe|Domäne|Vorteil|Ausschalten|Beschreibung|Nachteil|Reichweite|Nachladen|Fertigkeiten|Ziele|Herstellungsvoraussetzungen|Scope and Influence|Ziele|Hauptquartier|Key Members|Allies|Enemies|Assets|Membership Requirements|Accepted Alignments|TP \(BT\)|Werte|Anathema|Verzögerung|Traditionen|verstärktes|\(\+\d\)|Dauer|Bereich|Talente|ST|GE|KO|IN|WE|CH|Gegenstände|Sprache|Sprachen|At Will|Nahkampf|Härte|Hände|Reichweite|Anhaltender Schaden|Schaden|Rettungswurf|Maximale Wirkungsdauer|Phase \d|Auslöser|Effekt|Anforderungen|Zaubertrick|Schwächen|Immunitäten|Resistenzen|Auslöser|Effekt|Anforderung|Häufigkeit|Nutzung|Typ|Munition|Stufe|Preis|Aktivierung|Waffeneigenschaften|Entfernungseinheit|(?:Ungewöhnliche )?(?:Einfache )?(?:Nahkampf|Fernkampf|Spezial)?(?:spezial)?(?:kriegs)?waffe|Zaubertrick|Komplexität|Rücksetzer|Ablauf|\d+[stndhr]{2}(?! Stufe)|\(\d+[stndhr]{2}\))( )/gm,
+      "$1**$2**$3 "
+    )
+    .replace(/^ (\w)/gim, "&nbsp;&nbsp;&nbsp;&nbsp;$1")
+    .replace(/^  (\w)/gim, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$1")
+    .replace(/\(x(\d)\)/g, "(&times;$1)")
+    .replace(/\n(Bewegungsrate|TP|RK|Heimlichkeit|Wahrnehmung)/g, "\n**$1**")
+    .replace(
+      /\n(Kritischer Erfolg|Erfolg|Fehlschlag|Kritischer Fehlschlag)/gim,
+      "\n**$1**"
+    )
+    .replace(/\s\/(\w+)/g, " $1")
+    .replace(/, (TP)/, ", **$1**")
+    .replace(
+      /(REF|WIL|ZÄH|Willen|Zähigkeit|Reflex) *([+\-\d]+?)/gm,
+      "**$1** $2"
+    )
+    .replace(/(Last)/, "**$1**")
+    .replace(/^(Heimlichkeit|Wahrnehmung)/g, "**$1**")
+    .replace(/\(\s*\)/g, "")
+    .replace(/\((?![/])([\w,\s]*)\)/g, "**($1)**")
+    .replace(/\(\/([\w,\s]*)\)/g, "($1)")
+    .replace(/\((a|aa|aaa|r|f|1a|2a|3a)\)/gi, (m, p1) => {
+      // return `<img class="text-img" src="${images[p1.toLowerCase()]}">`;
+      return `<span class="pf-action ${p1.toLowerCase()}-action small-action"></span>`;
+    })
+    .replace(/:(a|aa|aaa|r|f|1a|2a|3a):/gi, (m, p1) => {
+      // return `<img class="text-img" src="${images[p1.toLowerCase()]}">`;
+      return `<span class="pf-action ${p1.toLowerCase()}-action small-action"></span>`;
+    })
+    .replace(/\[(a|aa|aaa|r|f|1a|2a|3a)\]/gi, (m, p1) => {
+      // return `<img class="text-img" src="${images[p1.toLowerCase()]}">`;
+      return `<span class="pf-action ${p1.toLowerCase()}-action small-action"></span>`;
+    })
+    .replace(/^-+$/gim, '<div class="sub-line" ></div>')
+    .replace(/[\u2014\u2013]/g, "-") // emdash
+    .replace(/[\u2022]/g, "*") // bullet
+    .replace(/[\u2018\u2019]/g, "'") // smart single quotes
+    .replace(/[\u201C\u201D]/g, '"'); // smart double quotes
+  str = converter.makeHtml(DOMPurify.sanitize(str));
+  str = str
+    .replace(/<\/div><br>/g, "</div>")
+    .replace(/<br \/>\n/gim, "</p><p>")
+    // .replace(
+    //   /<p><strong>(Rettungswurf|Vorteil|Nachteil)/gim,
+    //   '<p class="indent"><strong>$1'
+    // )
+    .replace(/<p>\.\./g, '<p class="indent">')
+    .replace(/<p>_/g, '<p class="hang">')
+    .replace(
+      /<p><strong>(Kritischer Erfolg|Erfolg|Fehlschlag|Kritischer Fehlschlag)/gim,
+      '<p class="pad"><strong>$1'
+    )
+    .replace(/<p><strong>/gim, '<p class="hang"><strong>')
+    .replace(/ \+/gim, "&nbsp;+");
+
+  return str
+}
+
 export const Card = ({
   title,
   traits,
@@ -87,79 +162,16 @@ export const Card = ({
   isPrint = false,
   raw,
 }: CardProps) => {
-  let str = description
-    .replace(/^([\w]*) SG/gim, "**$1** SG")
-    .replace(/^([\w ]*) \(/gim, "**$1** (")
-    // Preis 4 GM
-    // Schaden 1W8 H
-    // Last 1
-    // Hände 1
-    // Gruppe Schwerter
-    // Waffeneigenschaften Beidhändig W12
-    .replace(
-      /\n(Preis|Schaden|Last|Hände|Gruppe|Waffeneigenschaften|Entfernungseinheit|Nachladen|(?:Ungewöhnliche )?(?:Einfache )?(?:Nahkampf|Fernkampf|Spezial)(?:kriegs)?waffe)[\t\s+]/gm,
-      "\n\n$1 "
-    )
-    .replace(
-      /( |^)(RK Bonus|Kosten|Zugang|Härte TP|Domänenzauber|Kommunikation|Gottheiten|Vertiefter Domänenzauber||Secondary Casters|Secondary Checks|Ziel\(e\)|Archetyp|Voraussetzung|Voraussetzungen|Rüstungsspezialisierungseffekte|Kapazität|Speziell|Cast(?! \w+ Spell)|Malus \w+ Bewegungsrate|Rüstungsmalus|Stärke \d+|Gruppe|Domäne|Vorteil|Ausschalten|Beschreibung|Nachteil|Reichweite|Nachladen|Fertigkeiten|Ziele|Herstellungsvoraussetzungen|Scope and Influence|Ziele|Hauptquartier|Key Members|Allies|Enemies|Assets|Membership Requirements|Accepted Alignments|TP \(BT\)|Werte|Anathema|Verzögerung|Traditionen|verstärktes|\(\+\d\)|Dauer|Bereich|Talente|ST|GE|KO|IN|WE|CH|Gegenstände|Sprache|Sprachen|At Will|Nahkampf|Härte|Hände|Reichweite|Anhaltender Schaden|Schaden|Rettungswurf|Maximale Wirkungsdauer|Phase \d|Auslöser|Effekt|Anforderungen|Zaubertrick|Schwächen|Immunitäten|Resistenzen|Auslöser|Effekt|Anforderung|Häufigkeit|Nutzung|Typ|Munition|Stufe|Preis|Aktivierung|Waffeneigenschaften|Entfernungseinheit|(?:Ungewöhnliche )?(?:Einfache )?(?:Nahkampf|Fernkampf|Spezial)?(?:spezial)?(?:kriegs)?waffe|Zaubertrick|Komplexität|Rücksetzer|Ablauf|\d+[stndhr]{2}(?! Stufe)|\(\d+[stndhr]{2}\))( )/gm,
-      "$1**$2**$3 "
-    )
-    .replace(/^ (\w)/gim, "&nbsp;&nbsp;&nbsp;&nbsp;$1")
-    .replace(/^  (\w)/gim, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$1")
-    .replace(/\(x(\d)\)/g, "(&times;$1)")
-    .replace(/\n(Bewegungsrate|TP|RK|Heimlichkeit|Wahrnehmung)/g, "\n**$1**")
-    .replace(
-      /\n(Kritischer Erfolg|Erfolg|Fehlschlag|Kritischer Fehlschlag)/gim,
-      "\n**$1**"
-    )
-    .replace(/\s\/(\w+)/g, " $1")
-    .replace(/, (TP)/, ", **$1**")
-    .replace(
-      /(REF|WIL|ZÄH|Willen|Zähigkeit|Reflex) *([+\-\d]+?)/gm,
-      "**$1** $2"
-    )
-    .replace(/(Last)/, "**$1**")
-    .replace(/^(Heimlichkeit|Wahrnehmung)/g, "**$1**")
-    .replace(/\(\s*\)/g, "")
-    .replace(/\((a|aa|aaa|r|f|1a|2a|3a)\)/gi, (m, p1) => {
-      // return `<img class="text-img" src="${images[p1.toLowerCase()]}">`;
-      return `<span class="pf-action ${p1.toLowerCase()}-action small-action"></span>`;
-    })
-    .replace(/:(a|aa|aaa|r|f|1a|2a|3a):/gi, (m, p1) => {
-      // return `<img class="text-img" src="${images[p1.toLowerCase()]}">`;
-      return `<span class="pf-action ${p1.toLowerCase()}-action small-action"></span>`;
-    })
-    .replace(/\[(a|aa|aaa|r|f|1a|2a|3a)\]/gi, (m, p1) => {
-      // return `<img class="text-img" src="${images[p1.toLowerCase()]}">`;
-      return `<span class="pf-action ${p1.toLowerCase()}-action small-action"></span>`;
-    })
-    .replace(/^-+$/gim, '<div class="sub-line" ></div>')
-    .replace(/[\u2014\u2013]/g, "-") // emdash
-    .replace(/[\u2022]/g, "*") // bullet
-    .replace(/[\u2018\u2019]/g, "'") // smart single quotes
-    .replace(/[\u201C\u201D]/g, '"'); // smart double quotes
-  str = converter.makeHtml(DOMPurify.sanitize(str));
-  str = str
-    .replace(/<\/div><br>/g, "</div>")
-    .replace(/<br \/>\n/gim, "</p><p>")
-    .replace(
-      /<p><strong>(Rettungswurf|Vorteil|Nachteil)/gim,
-      '<p class="indent"><strong>$1'
-    )
-    .replace(/<p>\.\./g, '<p class="indent">')
-    .replace(
-      /<p><strong>(Kritischer Erfolg|Erfolg|Fehlschlag|Kritischer Fehlschlag)/gim,
-      '<p class="pad"><strong>$1'
-    )
-    .replace(/<p><strong>/gim, '<p class="hang"><strong>')
-    .replace(/ \+/gim, "&nbsp;+");
+
+  const str = transform(description)
+
   return (
     <div className={`bg-pf print-card ${noBorder ? "no-border" : undefined}`}>
       <div id="result" className="text-pf">
         <div className="d-flex pf-title-row">
           <div className="pf-trait-title">
             <h1>{title}</h1>
-            {type === "Talent" && actions !== "none" && (
+            {(type === "Talent" || type === "Zauber" || type === "Zaubertrick" || type === "Fokus") && actions !== "none" && (
               <span className={`pf-action-container`}>
                 <span className={`pf-action ${actions}-action md-action`} />
               </span>
