@@ -139,6 +139,15 @@ p:empty {
     margin-bottom: -0.2rem;
 }
 
+.card:nth-child(9n+1)::after, .card:nth-child(9n+2)::after, .card:nth-child(9n+3)::after {
+    content: "";
+    display: block;
+    height: 1px; /* Or any other height you prefer */
+    background: #000; /* Or any other color you prefer */
+    width: 100%;
+    margin-bottom: 10px; /* Adjust this value to create more or less space */
+}
+
 .nav-link {
     padding: 0.2rem 0.25rem;
 }
@@ -748,7 +757,27 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    
+}
+
+.sheet {
+    background-image: url('../public/bg-dirty.png');
+    background-repeat: repeat-y;
+    background-size: cover;
+}
+
+@media print {
+    .sheet {
+        width: 210mm;
+    }
+}
+
+.bg-sheet {
+    margin: 1mm;
+    padding: 5mm;
+    /*border: rgb(95, 67, 48) solid 1mm;*/
+    overflow: visible;
+    position: relative;
+
 }
 
 .seamless td {padding: 0}
@@ -778,9 +807,6 @@ body {
 
 .no-border {
     margin: 0;
-
-    
-    
 }
 
 .table {
@@ -794,8 +820,7 @@ body {
     -khtml-user-select: none; /* Konqueror HTML */
     -moz-user-select: none; /* Old versions of Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Opera and Firefox */
+    user-select: none; /* Non-prefixed version, currently */
 }
 
 @media print and (orientation: landscape) {
@@ -807,6 +832,10 @@ body {
 @media print and (orientation: portrait) {
     .card-container {
         grid-template-columns: repeat(3, 1fr) !important;
+    }
+    .card-container.simple {
+        grid-template-columns: repeat(2, 1fr) !important;
+
     }
 }
 
@@ -867,3 +896,9 @@ img { page-break-inside:avoid;
     page-break-after:avoid; }
 table, pre { page-break-inside:avoid }
 ul, ol, dl  { page-break-before:avoid }
+
+@media print {
+    .page-break {
+        page-break-before: always;
+    }
+}

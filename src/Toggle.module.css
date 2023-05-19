@@ -1,0 +1,8 @@
+.toggle:checked {
+  @apply: right-0 border-green-400;
+  @apply: bg-green-400;
+}
+
+.toggle:checked + .toggle-label {
+  @apply: bg-gray-200;
+}

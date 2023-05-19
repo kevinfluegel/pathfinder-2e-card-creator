@@ -53,6 +53,7 @@ export interface CardProps {
   fontSize?: string;
   noBorder?: boolean;
   isPrint?: boolean;
+  isSheet?: boolean;
 }
 
 const converter = new showdown.Converter();
@@ -160,13 +161,14 @@ export const Card = ({
   fontSize,
   noBorder = false,
   isPrint = false,
+  isSheet = false,
   raw,
 }: CardProps) => {
 
   const str = transform(description)
 
   return (
-    <div className={`bg-pf print-card ${noBorder ? "no-border" : undefined}`}>
+    <div className={`${isSheet ? 'bg-sheet' : 'bg-pf'} print-card ${noBorder ? "no-border" : ''}`}>
       <div id="result" className="text-pf">
         <div className="d-flex pf-title-row">
           <div className="pf-trait-title">

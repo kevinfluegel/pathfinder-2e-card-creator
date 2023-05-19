@@ -4,7 +4,8 @@ import { Card, CardProps } from "./Card";
 import JSZip from "jszip";
 import domtoimage from "dom-to-image";
 import {DragDropContext, Droppable, Draggable, DropResult} from 'react-beautiful-dnd';
-import {Button} from "./Button";
+import Toggle from "./Toggle";
+import {Checkbox} from "./Checkbox";
 
 type Pages = {
   [key: string]: CardProps[]
@@ -12,8 +13,9 @@ type Pages = {
 
 function Print() {
   const [cards, setCards] = useState<CardProps[]>([]);
-  const [print, setPrint] = useState("");
+  const [print, setPrint] = useState();
   const [isPrint, setIsPrint] = useState(false);
+  const [isPrintSheet, setIsPrintSheet] = useState<boolean>(false);
   const [downloadLink, setDownloadLink] = useState("");
   const printRefs = useRef<Array<HTMLElement | null>>([]);
 
@@ -26,18 +28,6 @@ function Print() {
     }
   }, [isPrint]);
 
-  // function handleOnDragEnd(result: any) {
-  //   // dropped outside the list
-  //   if (!result.destination) {
-  //     return;
-  //   }
-  //
-  //   const items = Array.from(cards);
-  //   const [reorderedItem] = items.splice(result.source.index, 1);
-  //   items.splice(result.destination.index, 0, reorderedItem);
-  //
-  //   setCards(items);
-  // }
 
   function handleOnDragEnd(result: DropResult) {
     if (!result.destination) return;
@@ -136,20 +126,26 @@ function Print() {
         <button
           className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 ml-2 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           onClick={addPage}
-        >Add Page</button>
+        >
+          Add Page
+        </button>
+        <Checkbox label={'Card Layout'} onChange={setIsPrintSheet} value={isPrintSheet} name={'Card Layout'}/>
       </div>
+      <div className={isPrintSheet ? 'sheet': ''}>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         {Object.entries(pages).map(([pageId, pageCards]) => (
           <>
-          <h2 className="text-5xl p-8 bg-slate-400 w-full mb-8 print:hidden">{pageId}</h2>
+            <h2 className="text-5xl p-8 bg-slate-400 w-full mb-8 print:hidden">
+              {pageId}
+            </h2>
           <Droppable droppableId={pageId} key={pageId}>
             {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef} className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 min-h-[300px] page-break card-container'>
+              <div {...provided.droppableProps} ref={provided.innerRef} className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 min-h-[300px] page-break card-container ${isPrintSheet ? 'simple' : ''}`}>
                 {pageCards?.map((card, idx) => (
                   <Draggable draggableId={card.id} index={idx} key={card.id}>
                     {(provided) => (
                       <div
-                        className="inline-block draggable h-[396px] w-[279px]"
+                        className=" inline-block draggable h-[396px] w-[279px] print:h-[100%] print:w-[100%]"
                         ref={(ref) => {
                           printRefs.current[idx] = ref
                           provided.innerRef(ref)
@@ -157,7 +153,7 @@ function Print() {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <Card {...card} noBorder isPrint={isPrint}/>
+                        <Card {...card} noBorder isPrint={isPrint} isSheet={isPrintSheet} />
                       </div>
                     )}
                   </Draggable>
@@ -169,6 +165,12 @@ function Print() {
           </>
         ))}
       </DragDropContext>
+      </div>
+      <h2 className="text-5xl p-8 bg-slate-400 w-full mt-10 mb-8 print:hidden">
+        <button className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 ml-2 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                onClick={addPage}
+        >Add Page</button>
+      </h2>
     </>
   );
 }
