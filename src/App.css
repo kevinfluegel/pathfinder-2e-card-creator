@@ -636,8 +636,8 @@ ul {
 
 .none-action { top: 3px; border-radius: 0; display: inline-block; width: 32px; height: 16px; }
 
-.reaction-action, .r { top: 3px; border-radius: 0; display: inline-block; width: 24px; height: 16px; background-repeat : no-repeat; background-image : url('../public/actions/re.png') }
-.f-action, .f { top: 3px; border-radius: 0; display: inline-block; width :16px; height :16px; background-repeat : no-repeat; background-image : url('../public/actions/free.png') }
+.reaction-action, .r, .r-action { top: 3px; border-radius: 0; display: inline-block; width: 24px; height: 16px; background-repeat : no-repeat; background-image : url('../public/actions/re.png') }
+.f-action, .f, .f-action { top: 3px; border-radius: 0; display: inline-block; width :16px; height :16px; background-repeat : no-repeat; background-image : url('../public/actions/free.png') }
 
 .a-action, .one-action { top: 3px; border-radius: 0; display: inline-block; width :16px; height :16px; background-repeat : no-repeat; background-image : url('../public/actions/one.png') }
 .one-action1 { top: 3px; border-radius: 0; display: inline-block; width :32px; height :32px; background-repeat : no-repeat; background-image : url('../public/actions/one.png') }
